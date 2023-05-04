@@ -1,0 +1,37 @@
+import Image from "next/image";
+import Link from "next/link";
+import styles from '../styles/guitarras.module.css';
+
+export default function Guitarrag({guitarra}) {
+  const { descripcion, imagen, nombre, precio, url } = guitarra
+
+  return (
+    <div className={styles.guitarra}>
+      <Image src={imagen.data.attributes.formats.medium.url} width={600} height={400}
+      alt={`Imagen guitarra ${nombre}`} />
+
+      <div className={styles.contenido}>
+        <h3>{nombre}</h3>
+        <p className={styles.descripcion}>{descripcion}</p>
+        <p className={styles.precio}>${precio}</p>
+        <Link href={`/guitarras/${url}`}>
+          <div className={styles.enlace}>
+            Ver Producto
+          </div>
+        </Link>
+      </div>
+    </div>
+  )
+}
+
+
+// export async function getServerSideProps({query: {url}}) {
+//     const respuesta = await fetch(`${process.env.API_URL}/guitarras?filters[url]=${url}&
+//     populate=imagen`)
+//     const {data: guitarra} = await respuesta.json()
+//     return {
+//         props: {
+//             guitarra
+//         }
+//     }
+// }
